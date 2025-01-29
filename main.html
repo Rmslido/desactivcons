@@ -1,1 +1,55 @@
 
+<!-- code mi desactiver clic droite sy raccourcis console -->
+<style>
+	#fampafantarana {
+		display: none;
+		z-index: 9999;
+		position: fixed;
+		bottom: 85%;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: rgba(0, 0, 0, 0.7);
+		color: rgb(255, 0, 0);
+		padding: 10px;
+		border-radius: 5px;
+		font-size: 14px;
+	}
+</style>
+</head>
+
+<!-- Div hampiseho  famantarana -->
+<div id="fampafantarana">Tsy azo atao ny mampiasa console sy manao clic droite amin'ity pejy ity !</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		function hamokaFampafantarana() {
+			const fampafantarana = document.getElementById('fampafantarana');
+			fampafantarana.style.display = 'block';
+
+			// code mampanjavona fampafantarana aorian'ny 1 segondra
+			setTimeout(function () {
+				fampafantarana.style.display = 'none';
+			}, 1000);
+		}
+
+		// Fanafoanana ny tsindry havanana
+		document.addEventListener('contextmenu', function (event) {
+			event.preventDefault();  // Hanafoana ny tsindry havanana
+			hamokaFampafantarana();  // Hampiseho fampafantarana
+		});
+
+		// Fanafoanana ny hitsin-dalana (F12, F11, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J, Ctrl+U)
+		document.addEventListener('keydown', function (event) {
+			const key = event.key.toLowerCase();
+
+			if (key === 'f12' || key === 'f11' ||
+				(event.ctrlKey && event.shiftKey && (key === 'i' || key === 'c' || key === 'j')) ||
+				(event.ctrlKey && key === 'u')) {
+				event.preventDefault();
+				hamokaFampafantarana();
+			}
+		});
+
+
+	});
+</script>
